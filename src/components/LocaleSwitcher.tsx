@@ -3,7 +3,6 @@
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
-import { PhoneInput } from "./ui/phone-input";
 
 export default function LocaleSwitcher() {
   const locale = useLocale();
@@ -17,15 +16,12 @@ export default function LocaleSwitcher() {
     }
   };
   return (
-    <>
-      <PhoneInput />
-      <select value={locale} onChange={(e) => switchLocale(e.target.value)}>
-        {routing.locales.map((loc) => (
-          <option className="text-black" key={loc} value={loc}>
-            {loc.toUpperCase()}
-          </option>
-        ))}
-      </select>
-    </>
+    <select value={locale} onChange={(e) => switchLocale(e.target.value)}>
+      {routing.locales.map((loc) => (
+        <option className="text-black" key={loc} value={loc}>
+          {loc.toUpperCase()}
+        </option>
+      ))}
+    </select>
   );
 }
