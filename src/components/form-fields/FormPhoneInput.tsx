@@ -8,17 +8,11 @@ import {
   FormMessage,
 } from "../ui/form";
 import { cn } from "@/lib/utils";
-import {
-  useFormContext,
-  type Control,
-  type FieldValues,
-  type Path,
-} from "react-hook-form";
+import { useFormContext, type FieldValues, type Path } from "react-hook-form";
 import { PhoneInput } from "../ui/phone-input";
 
 interface FormPhoneInput<TFormValues extends FieldValues>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "name" | "defaultValue"> {
-  control?: Control<TFormValues>;
   name: Path<TFormValues>;
   label?: React.ReactNode;
   description?: string;
@@ -31,7 +25,6 @@ export default function FormPhoneInput<TFormValues extends FieldValues>({
   label,
   name,
   description,
-  className,
   labelClassName,
 }: FormPhoneInput<TFormValues>) {
   const form = useFormContext<TFormValues>();

@@ -54,14 +54,12 @@ export default function FormInfiniteSelect<
 }: FormInfiniteSelectProps<TFormValues, TData>) {
   const form = useFormContext();
 
-  const { data, isFetching, ref } = useInfinite<TData>({
+  const { data, isFetching, ref, hasNextPage } = useInfinite<TData>({
     queryKey,
     fetchFn: (pageNumber) => fetchFn(pageNumber),
   });
 
   const options = data?.pages.flatMap((page) => page.data) ?? [];
-  const lastPage = data?.pages[data.pages.length - 1];
-  const hasMoreData = lastPage && lastPage.current_page < lastPage.total;
 
   return (
     <FormField
@@ -105,7 +103,7 @@ export default function FormInfiniteSelect<
                   </div>
                 )}
 
-                {!isFetching && !hasMoreData && (
+                {!isFetching && !hasNextPage && (
                   <div className="text-muted-foreground py-2 text-center text-sm">
                     لا يوجد المزيد من البيانات
                   </div>

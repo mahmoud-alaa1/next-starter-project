@@ -31,8 +31,8 @@ function useInfinite<T>({
     queryFn: ({ pageParam = 1, signal }) => fetchFn(pageParam, { signal }),
     getNextPageParam: (lastPage) => {
       const nextPage =
-        lastPage.current_page < lastPage.last_page
-          ? lastPage.current_page + 1
+        lastPage.meta.current_page < lastPage.meta.total
+          ? lastPage.meta.current_page + 1
           : undefined;
       return nextPage;
     },

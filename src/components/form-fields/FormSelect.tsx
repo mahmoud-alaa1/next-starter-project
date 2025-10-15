@@ -6,7 +6,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { Control, FieldValues, Path } from "react-hook-form";
+import { FieldValues, Path, useFormContext } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import {
   Select,
@@ -17,7 +17,6 @@ import {
 } from "../ui/select";
 
 interface FormSelectProps<TFormValues extends FieldValues> {
-  control: Control<TFormValues>;
   name: Path<TFormValues>;
   label?: React.ReactNode;
   description?: string;
@@ -30,7 +29,6 @@ interface FormSelectProps<TFormValues extends FieldValues> {
 }
 
 export default function FormSelect<TFormValues extends FieldValues>({
-  control,
   label,
   name,
   description,
@@ -41,9 +39,10 @@ export default function FormSelect<TFormValues extends FieldValues>({
   disabled,
   ...props
 }: FormSelectProps<TFormValues>) {
+  const form = useFormContext<TFormValues>();
   return (
     <FormField
-      control={control}
+      control={form.control}
       name={name}
       render={({ field }) => (
         <FormItem>

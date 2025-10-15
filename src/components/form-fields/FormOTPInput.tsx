@@ -8,10 +8,9 @@ import {
 } from "../ui/form";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 
-import { Control, FieldValues, Path } from "react-hook-form";
+import { FieldValues, Path, useFormContext } from "react-hook-form";
 
 interface FormOTPInputProps<TFormValues extends FieldValues> {
-  control: Control<TFormValues>;
   name: Path<TFormValues>;
   label?: React.ReactNode;
   description?: string;
@@ -21,7 +20,6 @@ interface FormOTPInputProps<TFormValues extends FieldValues> {
 }
 
 export default function FormOTPInput<TFormValues extends FieldValues>({
-  control,
   name,
   label,
   description,
@@ -29,9 +27,10 @@ export default function FormOTPInput<TFormValues extends FieldValues>({
   className,
   slotClassName,
 }: FormOTPInputProps<TFormValues>) {
+  const form = useFormContext<TFormValues>();
   return (
     <FormField
-      control={control}
+      control={form.control}
       name={name}
       render={({ field }) => (
         <FormItem className="flex flex-col items-center space-y-2">

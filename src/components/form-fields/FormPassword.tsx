@@ -2,14 +2,13 @@ import { useState, type InputHTMLAttributes } from "react";
 import { Button } from "@/components/ui/button";
 import { Eye, EyeOff } from "lucide-react";
 import FormInput from "./FormInput";
-import { Control, FieldValues, Path } from "react-hook-form";
+import { FieldValues, Path } from "react-hook-form";
 
 interface FormPasswordProps<TFormValues extends FieldValues>
   extends Omit<
     InputHTMLAttributes<HTMLInputElement>,
     "name" | "defaultValue" | "type"
   > {
-  control?: Control<TFormValues>;
   name: Path<TFormValues>;
   label?: React.ReactNode;
   description?: string;
@@ -17,7 +16,6 @@ interface FormPasswordProps<TFormValues extends FieldValues>
 }
 
 export default function FormPassword<TFormValues extends FieldValues>({
-  control,
   name,
   label,
   description,
@@ -29,7 +27,6 @@ export default function FormPassword<TFormValues extends FieldValues>({
 
   return (
     <FormInput
-      control={control}
       name={name}
       label={label}
       description={description}
